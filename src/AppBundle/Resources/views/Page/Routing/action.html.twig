@@ -1,0 +1,8 @@
+app_{{ entity_name|snake }}_{{ action }}_{{ short_action }}_{{ entity_name|snake }}:
+    path: /{{ short_action }}_{{ entity_name|snake }}/{% if idParameter is defined and idParameter %}{id}{% endif %}
+
+    defaults: { _controller: '{{ bundle_name }}:{{ entity_name }}/{{ action|title }}:{{ short_action }}{{ entity_name }}' }
+{% if idParameter is defined and idParameter %}
+    requirements:
+        id: \d+
+{% endif %}

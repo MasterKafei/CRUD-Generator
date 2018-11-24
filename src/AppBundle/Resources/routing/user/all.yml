@@ -1,0 +1,20 @@
+app_user_creation:
+    prefix: /creation/
+    resource: "creation.yml"
+
+app_user_deletion:
+    prefix: /deletion/
+    resource: "deletion.yml"
+
+app_user_edition:
+    prefix: /edition/
+    resource: "edition.yml"
+
+app_user_listing:
+    prefix: /listing/
+    resource: "listing.yml"
+
+app_user_showing:
+    prefix: /showing/
+    resource: "showing.yml"
+

@@ -1,0 +1,5 @@
+app_user_edition_edit_user:
+    path: /edit_user/{id}
+    defaults: { _controller: 'AppBundle:User/Edition:editUser' }
+    requirements:
+        id: \d+

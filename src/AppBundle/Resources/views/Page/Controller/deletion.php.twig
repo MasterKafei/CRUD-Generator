@@ -1,0 +1,19 @@
+{% set variable_name %}${{- entity_name|first|lower ~ entity_name|slice(1, entity_name|length) -}}{% endset %}
+<?php
+
+namespace AppBundle\Controller\{{ entity_name }};
+
+use AppBundle\Entity\{{ entity_name }};
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class DeletionController extends Controller
+{
+    public function delete{{ entity_name }}Action({{ entity_name }} {{ variable_name }})
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove({{ variable_name }});
+        $em->flush();
+
+        return $this->redirectToRoute('app_admin_{{ entity_name|snake }}_listing_list_{{ entity_name|snake }}');
+    }
+}

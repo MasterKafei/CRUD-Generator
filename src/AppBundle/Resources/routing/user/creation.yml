@@ -1,0 +1,3 @@
+app_user_creation_create_user:
+    path: /create_user/
+    defaults: { _controller: 'AppBundle:User/Creation:createUser' }

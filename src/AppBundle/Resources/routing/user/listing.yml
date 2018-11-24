@@ -1,0 +1,3 @@
+app_user_listing_list_user:
+    path: /list_user/
+    defaults: { _controller: 'AppBundle:User/Listing:listUser' }

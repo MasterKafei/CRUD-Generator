@@ -1,0 +1,6 @@
+{% for action in actions %}
+app_{{ entity_name|snake }}_{{ action }}:
+    prefix: /{{ action }}/
+    resource: "{{ action }}.yml"
+
+{% endfor %}

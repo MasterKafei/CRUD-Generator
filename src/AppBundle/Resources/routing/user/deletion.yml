@@ -1,0 +1,5 @@
+app_user_deletion_delete_user:
+    path: /delete_user/{id}
+    defaults: { _controller: 'AppBundle:User/Deletion:deleteUser' }
+    requirements:
+        id: \d+

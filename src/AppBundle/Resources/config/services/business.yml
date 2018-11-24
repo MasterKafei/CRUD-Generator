@@ -1,0 +1,11 @@
+services:
+
+    app.business.routing:
+        class: AppBundle\Service\Business\RoutingBusiness
+        parent: app.util.abstract_container_aware
+        public: true
+
+    app.business.controller:
+        class: AppBundle\Service\Business\ControllerBusiness
+        parent: app.util.abstract_container_aware
+        public: true

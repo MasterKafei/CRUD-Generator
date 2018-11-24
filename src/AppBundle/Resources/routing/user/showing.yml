@@ -1,0 +1,5 @@
+app_user_showing_show_user:
+    path: /show_user/{id}
+    defaults: { _controller: 'AppBundle:User/Showing:showUser' }
+    requirements:
+        id: \d+

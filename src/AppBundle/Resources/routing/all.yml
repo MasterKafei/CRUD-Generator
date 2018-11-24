@@ -1,0 +1,3 @@
+app_user:
+    prefix: /user/
+    resource: "user/all.yml"

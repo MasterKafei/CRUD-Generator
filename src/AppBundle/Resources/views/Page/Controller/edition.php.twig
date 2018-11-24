@@ -1,0 +1,31 @@
+{% set variable_name %}${{- entity_name|first|lower ~ entity_name|slice(1, entity_name|length) -}}{% endset %}
+<?php
+
+namespace AppBundle\Controller\{{ entity_name }};
+
+use AppBundle\Entity\{{ entity_name }};
+use AppBundle\Form\Type\{{ entity_name }}\Edition\Edition{{ entity_name }}Type;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+class EditionController extends Controller
+{
+    public function edit{{ entity_name }}Action(Request $request, {{ entity_name }} {{ variable_name }})
+    {
+        $form = $this->createForm(Edition{{ entity_name }}Type::class, {{ variable_name }});
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist({{ variable_name }});
+            $em->flush();
+
+            return $this->redirectToRoute('app_admin_{{ entity_name|snake }}_listing_list_{{ entity_name|snake }}');
+        }
+
+        return $this->render('@Page/{{ entity_name }}/Edition/edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+}
