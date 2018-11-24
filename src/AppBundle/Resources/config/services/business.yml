@@ -9,3 +9,8 @@ services:
         class: AppBundle\Service\Business\ControllerBusiness
         parent: app.util.abstract_container_aware
         public: true
+
+    app.business.view:
+        class: AppBundle\Service\Business\ViewBusiness
+        parent: app.util.abstract_container_aware
+        public: true

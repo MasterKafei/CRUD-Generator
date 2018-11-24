@@ -1,0 +1,6 @@
+{% set variable_name %}${{- entity_name|first|lower ~ entity_name|slice(1, entity_name|length) -}}s{% endset %}
+{{ ('{% extends \'@Layout' ~ (is_admin ? '/Admin' : '') ~ '/Page/Full/base.html.twig\' %}')|raw }}
+
+{{ '{% block body %}' }}
+{{ '    {{ dump('~ variable_name ~ ') }}' }}
+{{ '{% endblock body %}' }}

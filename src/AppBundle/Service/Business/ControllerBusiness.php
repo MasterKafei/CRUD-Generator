@@ -78,10 +78,6 @@ class ControllerBusiness extends AbstractContainerAware
 
     private function addGenericController($entityName, $mode, $template)
     {
-        if ($this->options[self::$optionsMode[$mode]]) {
-            return;
-        }
-
         $folder = $this->getControllerFolder() . $entityName;
         $content = $this->container->get('twig')->render($template, array(
             'entity_name' => $entityName,

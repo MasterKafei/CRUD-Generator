@@ -41,8 +41,9 @@ class EntityCRUDCommand extends ContainerAwareCommand
         $entityName = $input->getArgument('entity-name');
         $options = $this->applyOptions($input->getOptions());
 
-        /*$this->getContainer()->get('app.business.routing')->addEntityRoutes($entityName, $options);*/
-        $this->getContainer()->get('app.business.controller')->addEntityController($entityName, $options);
+        /*$this->getContainer()->get('app.business.routing')->addEntityRoutes($entityName, $options);
+        $this->getContainer()->get('app.business.controller')->addEntityController($entityName, $options);*/
+        $this->getContainer()->get('app.business.view')->addEntityView($entityName, $options);
     }
 
     protected function getDefaults(OptionsResolver $optionsResolver)
