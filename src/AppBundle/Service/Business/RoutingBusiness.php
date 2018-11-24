@@ -3,6 +3,7 @@
 
 namespace AppBundle\Service\Business;
 
+use AppBundle\Command\EntityCRUDCommand;
 use AppBundle\Service\Util\AbstractContainerAware;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -19,26 +20,39 @@ class RoutingBusiness extends AbstractContainerAware
         self::CREATION_ROUTE_TYPE => array(
             'short_action' => 'create',
             'id' => false,
+            'option-key' => EntityCRUDCommand::SKIP_CREATION_OPTION_KEY,
         ),
         self::DELETION_ROUTE_TYPE => array(
             'short_action' => 'delete',
             'id' => true,
+            'option-key' => EntityCRUDCommand::SKIP_DELETION_OPTION_KEY,
         ),
         self::EDITION_ROUTE_TYPE => array(
             'short_action' => 'edit',
             'id' => true,
+            'option-key' => EntityCRUDCommand::SKIP_EDITION_OPTION_KEY,
         ),
         self::LISTING_ROUTE_TYPE => array(
             'short_action' => 'list',
             'id' => false,
+            'option-key' => EntityCRUDCommand::SKIP_LISTING_OPTION_KEY,
         ),
         self::SHOWING_ROUTE_TYPE => array(
             'short_action' => 'show',
             'id' => true,
+            'option-key' => EntityCRUDCommand::SKIP_SHOWING_OPTION_KEY,
         ),
     );
 
+    /**
+     * @var Filesystem
+     */
     private $fileSystem;
+
+    /**
+     * @var array
+     */
+    private $options;
 
     public function __construct()
     {
@@ -48,10 +62,12 @@ class RoutingBusiness extends AbstractContainerAware
     /**
      * Create all entity routes.
      *
-     * @param $entityName
+     * @param string $entityName
+     * @param array $options
      */
-    public function addEntityRoutes($entityName)
+    public function addEntityRoutes($entityName, $options)
     {
+        $this->options = $options;
         $this->addActionsRoute($entityName);
         $this->addAllRoute($entityName);
         $this->addEntityRoute($entityName);
@@ -61,8 +77,10 @@ class RoutingBusiness extends AbstractContainerAware
     {
         $folder = $this->getEntityRouteFolder($entityName);
         foreach (self::$short_actions as $action => $short_action) {
-            $content = $this->generateActionRoute($entityName, $action);
-            $this->addContent($folder . '/' . $action . '.' . self::EXTENSION_FILE, $content);
+            if(!$this->options[$short_action['option-key']]) {
+                $content = $this->generateActionRoute($entityName, $action);
+                $this->addContent($folder . '/' . $action . '.' . self::EXTENSION_FILE, $content);
+            }
         }
     }
 
@@ -86,6 +104,7 @@ class RoutingBusiness extends AbstractContainerAware
             'bundle_name' => $bundleName,
             'short_action' => self::$short_actions[$action]['short_action'],
             'idParameter' => self::$short_actions[$action]['id'],
+            'is_admin' => $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY],
         ));
     }
 
@@ -93,14 +112,23 @@ class RoutingBusiness extends AbstractContainerAware
     {
         return $this->container->get('twig')->render('@Page/Routing/entity.html.twig', array(
             'entity_name' => $entityName,
+            'is_admin' => $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY],
         ));
     }
 
     private function generateAllRoute($entityName)
     {
+        $short_actions = array();
+        foreach (self::$short_actions as $key => $action) {
+            if(!$this->options[$action['option-key']]) {
+                $short_actions[$key] = $action;
+            }
+        }
+
         return $this->container->get('twig')->render('@Page/Routing/all.html.twig', array(
-            'actions' => array_keys(self::$short_actions),
+            'actions' => array_keys($short_actions),
             'entity_name' => $entityName,
+            'is_admin' => $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY],
         ));
     }
 
@@ -111,7 +139,7 @@ class RoutingBusiness extends AbstractContainerAware
 
     private function getEntityRouteFolder($entityName, $bundleName = 'AppBundle')
     {
-        $folder = $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/routing/';
+        $folder = $this->getRouteFolder($bundleName) . '/';
         $entityNameSnakeCase = $this->container->get('app.util.case_manager')->snake($entityName);
 
         return $folder . $entityNameSnakeCase;
@@ -119,6 +147,8 @@ class RoutingBusiness extends AbstractContainerAware
 
     private function getRouteFolder($bundleName = 'AppBundle')
     {
-        return $folder = $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/routing';
+        $isAdmin = $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY];
+
+        return $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/config/routing' . ($isAdmin ? '/admin' : '');
     }
 }

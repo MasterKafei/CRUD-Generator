@@ -1,5 +1,5 @@
 {% for action in actions %}
-app_{{ entity_name|snake }}_{{ action }}:
+app{% if is_admin %}_admin{% endif %}_{{ entity_name|snake }}_{{ action }}:
     prefix: /{{ action }}/
     resource: "{{ action }}.yml"
 

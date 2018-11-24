@@ -1,7 +1,7 @@
 {% set variable_name %}${{- entity_name|first|lower ~ entity_name|slice(1, entity_name|length) -}}{% endset %}
 <?php
 
-namespace AppBundle\Controller\{{ entity_name }};
+namespace AppBundle\Controller\{% if is_admin %}Admin\{% endif %}{{ entity_name }};
 
 use AppBundle\Entity\{{ entity_name }};
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +10,7 @@ class ShowingController extends Controller
 {
     public function show{{ entity_name }}Action({{ entity_name }} {{ variable_name }})
     {
-        return $this->render('@Page/{{ entity_name }}/Showing/show_{{ entity_name|snake }}.html.twig', array(
+        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Showing/show_{{ entity_name|snake }}.html.twig', array(
             '{{ entity_name|snake }}' => {{ variable_name }},
         ));
     }

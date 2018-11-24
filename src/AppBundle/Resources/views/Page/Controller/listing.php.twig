@@ -1,7 +1,7 @@
 {% set variable_name %}${{- entity_name|first|lower ~ entity_name|slice(1, entity_name|length) -}}{% endset %}
 <?php
 
-namespace AppBundle\Controller\{{ entity_name }};
+namespace AppBundle\Controller\{% if is_admin %}Admin\{% endif %}{{ entity_name }};
 
 use AppBundle\Entity\{{ entity_name }};
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,7 +12,7 @@ class ListingController extends Controller
     {
         {{ variable_name }} = $this->getDoctrine()->getRepository({{ entity_name }}::class)->findAll();
 
-        return $this->render('@Page/{{ entity_name }}/Listing/list.html.twig', array(
+        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Listing/list.html.twig', array(
             '{{ variable_name|snake }}' => {{ variable_name }},
         ));
     }

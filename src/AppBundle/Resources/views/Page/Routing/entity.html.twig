@@ -1,3 +1,4 @@
-app_{{ entity_name|snake }}:
+app{% if is_admin %}_admin{% endif %}_{{ entity_name|snake }}:
     prefix: /{{ entity_name|snake }}/
     resource: "{{ entity_name|snake }}/all.yml"
+

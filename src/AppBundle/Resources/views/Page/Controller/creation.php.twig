@@ -1,10 +1,10 @@
 {% set variable_name %}${{- entity_name|first|lower ~ entity_name|slice(1, entity_name|length) -}}{% endset %}
 <?php
 
-namespace AppBundle\Controller\{{ entity_name }};
+namespace AppBundle\Controller\{% if is_admin %}Admin\{% endif %}{{ entity_name }};
 
 use AppBundle\Entity\{{ entity_name }};
-use AppBundle\Form\Type\{{ entity_name }}\Creation\Creation{{ entity_name }}Type;
+use AppBundle\Form\Type\{% if is_admin %}Admin\{% endif %}{{ entity_name }}\Creation\Creation{{ entity_name }}Type;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,10 +20,10 @@ class CreationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist({{ variable_name }});
             $em->flush();
-            return $this->redirectToRoute('app_{{ entity_name|lower }}_listing_list_{{ entity_name|lower }}');
+            return $this->redirectToRoute('app_{% if is_admin %}admin_{% endif %}{{ entity_name|lower }}_listing_list_{{ entity_name|lower }}');
         }
 
-        return $this->render('@Page/{{ entity_name }}/Creation/create.html.twig', array(
+        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Creation/create.html.twig', array(
             'form' => $form->createView(),
         ));
     }
