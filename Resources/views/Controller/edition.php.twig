@@ -4,7 +4,7 @@
 namespace AppBundle\Controller\{% if is_admin %}Admin\{% endif %}{{ entity_name }};
 
 use AppBundle\Entity\{{ entity_name }};
-use AppBundle\Form\Type\{{ entity_name }}\Edition\Edition{{ entity_name }}Type;
+use AppBundle\Form\Type\{{ entity_name }}\Edition\Edit{{ entity_name }}Type;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,7 +12,7 @@ class EditionController extends Controller
 {
     public function edit{{ entity_name }}Action(Request $request, {{ entity_name }} {{ variable_name }})
     {
-        $form = $this->createForm(Edition{{ entity_name }}Type::class, {{ variable_name }});
+        $form = $this->createForm(Edit{{ entity_name }}Type::class, {{ variable_name }});
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -4,7 +4,7 @@
 namespace AppBundle\Controller\{% if is_admin %}Admin\{% endif %}{{ entity_name }};
 
 use AppBundle\Entity\{{ entity_name }};
-use AppBundle\Form\Type\{% if is_admin %}Admin\{% endif %}{{ entity_name }}\Creation\Creation{{ entity_name }}Type;
+use AppBundle\Form\Type\{% if is_admin %}Admin\{% endif %}{{ entity_name }}\Creation\Create{{ entity_name }}Type;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,7 +13,7 @@ class CreationController extends Controller
     public function create{{ entity_name }}Action(Request $request)
     {
         {{ variable_name }} = new {{ entity_name }}();
-        $form = $this->createForm(Creation{{ entity_name }}Type::class, {{ variable_name }});
+        $form = $this->createForm(Create{{ entity_name }}Type::class, {{ variable_name }});
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
