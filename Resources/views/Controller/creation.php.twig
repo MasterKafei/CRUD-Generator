@@ -23,7 +23,7 @@ class CreationController extends Controller
             return $this->redirectToRoute('app_{% if is_admin %}admin_{% endif %}{{ entity_name|lower }}_listing_list_{{ entity_name|lower }}');
         }
 
-        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Creation/create.html.twig', array(
+        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Creation/create_{{ entity_name|snake }}.html.twig', array(
             'form' => $form->createView(),
         ));
     }

@@ -12,7 +12,7 @@ class ListingController extends Controller
     {
         {{ variable_name }} = $this->getDoctrine()->getRepository({{ entity_name }}::class)->findAll();
 
-        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Listing/list.html.twig', array(
+        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Listing/list_{{ entity_name|snake }}.html.twig', array(
             '{{ variable_name|snake }}' => {{ variable_name }},
         ));
     }
