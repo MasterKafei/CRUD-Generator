@@ -24,7 +24,7 @@ class EditionController extends Controller
             return $this->redirectToRoute('app_{% if is_admin %}admin_{% endif %}{{ entity_name|snake }}_listing_list_{{ entity_name|snake }}');
         }
 
-        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Edition/edit__{{ entity_name|snake }}.html.twig', array(
+        return $this->render('@Page/{% if is_admin %}Admin/{% endif %}{{ entity_name }}/Edition/edit_{{ entity_name|snake }}.html.twig', array(
             'form' => $form->createView(),
         ));
     }
