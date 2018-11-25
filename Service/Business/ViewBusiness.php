@@ -94,6 +94,6 @@ class ViewBusiness extends AbstractContainerAware
     private function getViewFolder($bundleName = 'AppBundle')
     {
         $isAdmin = $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY];
-        return $folder = $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/views/CRUD/' . ($isAdmin ? 'Admin/' : '');
+        return $folder = $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/views/Page/' . ($isAdmin ? 'Admin/' : '');
     }
 }
