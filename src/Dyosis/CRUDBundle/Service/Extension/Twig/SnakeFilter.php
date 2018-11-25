@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppBundle\Extension\Twig;
+namespace Dyosis\CRUDBundle\Service\Extension\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,6 +26,6 @@ class SnakeFilter extends \Twig_Extension
 
     public function snakeFilter($input)
     {
-        return $this->container->get('app.util.case_manager')->snake($input);
+        return $this->container->get('dyosis.util.case_manager')->snake($input);
     }
 }

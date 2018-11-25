@@ -1,9 +1,0 @@
-services:
-    app.util.abstract_container_aware:
-        abstract: true
-        calls:
-        - [setContainer, ['@service_container']]
-
-    app.util.case_manager:
-        class: AppBundle\Service\Util\CaseManager
-        public: true

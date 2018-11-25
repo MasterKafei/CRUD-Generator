@@ -1,0 +1,5 @@
+services:
+    Dyosis\CRUDBundle\Service\Extension\Twig\SnakeFilter:
+        public: false
+        arguments: ['@service_container']
+        tags: ['twig.extension']

@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle;
+namespace Dyosis\CRUDBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class CRUDBundle extends Bundle
 {
 }

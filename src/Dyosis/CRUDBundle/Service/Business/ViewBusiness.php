@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Service\Business;
+namespace Dyosis\CRUDBundle\Service\Business;
 
-use AppBundle\Command\EntityCRUDCommand;
-use AppBundle\Service\Util\AbstractContainerAware;
+use Dyosis\CRUDBundle\Command\EntityCRUDCommand;
+use Dyosis\CRUDBundle\Service\Util\AbstractContainerAware;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ViewBusiness extends AbstractContainerAware
@@ -53,33 +53,33 @@ class ViewBusiness extends AbstractContainerAware
         $this->addShowingView($entityName);
     }
 
-    public function addCreationView($entityName)
+    private function addCreationView($entityName)
     {
-        $this->addGenericView($entityName, self::CREATION_MODE_KEY, '@Page/Views/creation.html.twig.twig');
+        $this->addGenericView($entityName, self::CREATION_MODE_KEY, '@CRUD/Views/creation.html.twig.twig');
     }
 
-    public function addEditionView($entityName)
+    private function addEditionView($entityName)
     {
-        $this->addGenericView($entityName, self::EDITION_MODE_KEY, '@Page/Views/edition.html.twig.twig');
+        $this->addGenericView($entityName, self::EDITION_MODE_KEY, '@CRUD/Views/edition.html.twig.twig');
     }
 
-    public function addListingView($entityName)
+    private function addListingView($entityName)
     {
-        $this->addGenericView($entityName, self::LISTING_MODE_KEY, '@Page/Views/listing.html.twig.twig');
+        $this->addGenericView($entityName, self::LISTING_MODE_KEY, '@CRUD/Views/listing.html.twig.twig');
     }
 
-    public function addShowingView($entityName)
+    private function addShowingView($entityName)
     {
-        $this->addGenericView($entityName, self::SHOWING_MODE_KEY, '@Page/Views/showing.html.twig.twig');
+        $this->addGenericView($entityName, self::SHOWING_MODE_KEY, '@CRUD/Views/showing.html.twig.twig');
     }
 
-    public function addGenericView($entityName, $mode, $template)
+    private function addGenericView($entityName, $mode, $template)
     {
         if ($this->options[self::$optionsMode[$mode]]) {
             return;
         }
 
-        $file = $this->getViewFolder() . $entityName . '/' . $mode . '/' . self::$shortActions[$mode] . '_' . $this->container->get('app.util.case_manager')->snake($entityName) . '.html.' . self::FILE_EXTENSION;
+        $file = $this->getViewFolder() . $entityName . '/' . $mode . '/' . self::$shortActions[$mode] . '_' . $this->container->get('dyosis.util.case_manager')->snake($entityName) . '.html.' . self::FILE_EXTENSION;
         $content = $this->container->get('twig')->render($template, array(
             'is_admin' => $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY],
             'entity_name' => $entityName,
@@ -94,6 +94,6 @@ class ViewBusiness extends AbstractContainerAware
     private function getViewFolder($bundleName = 'AppBundle')
     {
         $isAdmin = $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY];
-        return $folder = $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/views/Page/' . ($isAdmin ? 'Admin/' : '');
+        return $folder = $this->container->getParameter('kernel.root_dir') . '/../src/' . $bundleName . '/Resources/views/CRUD/' . ($isAdmin ? 'Admin/' : '');
     }
 }

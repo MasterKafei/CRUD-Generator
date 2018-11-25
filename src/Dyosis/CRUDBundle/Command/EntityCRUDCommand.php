@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppBundle\Command;
+namespace Dyosis\CRUDBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -41,9 +41,9 @@ class EntityCRUDCommand extends ContainerAwareCommand
         $entityName = $input->getArgument('entity-name');
         $options = $this->applyOptions($input->getOptions());
 
-        /*$this->getContainer()->get('app.business.routing')->addEntityRoutes($entityName, $options);
-        $this->getContainer()->get('app.business.controller')->addEntityController($entityName, $options);*/
-        $this->getContainer()->get('app.business.view')->addEntityView($entityName, $options);
+        $this->getContainer()->get('dyosis.business.routing')->addEntityRoutes($entityName, $options);
+        $this->getContainer()->get('dyosis.business.controller')->addEntityController($entityName, $options);
+        $this->getContainer()->get('dyosis.business.view')->addEntityView($entityName, $options);
     }
 
     protected function getDefaults(OptionsResolver $optionsResolver)

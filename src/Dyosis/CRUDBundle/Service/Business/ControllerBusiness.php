@@ -1,10 +1,10 @@
 <?php
 
 
-namespace AppBundle\Service\Business;
+namespace Dyosis\CRUDBundle\Service\Business;
 
-use AppBundle\Command\EntityCRUDCommand;
-use AppBundle\Service\Util\AbstractContainerAware;
+use Dyosis\CRUDBundle\Command\EntityCRUDCommand;
+use Dyosis\CRUDBundle\Service\Util\AbstractContainerAware;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ControllerBusiness extends AbstractContainerAware
@@ -53,27 +53,27 @@ class ControllerBusiness extends AbstractContainerAware
 
     private function addCreationController($entityName)
     {
-        $this->addGenericController($entityName, self::CREATION_MODE_KEY, '@Page/Controller/creation.php.twig');
+        $this->addGenericController($entityName, self::CREATION_MODE_KEY, '@CRUD/Controller/creation.php.twig');
     }
 
     private function addDeletionController($entityName)
     {
-        $this->addGenericController($entityName, self::DELETION_MODE_KEY, '@Page/Controller/deletion.php.twig');
+        $this->addGenericController($entityName, self::DELETION_MODE_KEY, '@CRUD/Controller/deletion.php.twig');
     }
 
     private function addEditionController($entityName)
     {
-        $this->addGenericController($entityName, self::EDITION_MODE_KEY, '@Page/Controller/edition.php.twig');
+        $this->addGenericController($entityName, self::EDITION_MODE_KEY, '@CRUD/Controller/edition.php.twig');
     }
 
     private function addListingController($entityName)
     {
-        $this->addGenericController($entityName, self::LISTING_MODE_KEY, '@Page/Controller/listing.php.twig');
+        $this->addGenericController($entityName, self::LISTING_MODE_KEY, '@CRUD/Controller/listing.php.twig');
     }
 
     private function addShowingController($entityName)
     {
-        $this->addGenericController($entityName, self::SHOWING_MODE_KEY, '@Page/Controller/showing.php.twig');
+        $this->addGenericController($entityName, self::SHOWING_MODE_KEY, '@CRUD/Controller/showing.php.twig');
     }
 
     private function addGenericController($entityName, $mode, $template)

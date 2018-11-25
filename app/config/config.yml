@@ -35,9 +35,6 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    paths:
-        "%kernel.project_dir%/src/AppBundle/Resources/views/Layout": Layout
-        "%kernel.project_dir%/src/AppBundle/Resources/views/Page": Page
 
 # Doctrine Configuration
 doctrine:

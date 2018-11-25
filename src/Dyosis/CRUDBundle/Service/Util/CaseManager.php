@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppBundle\Service\Util;
+namespace Dyosis\CRUDBundle\Service\Util;
 
 
 class CaseManager

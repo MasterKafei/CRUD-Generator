@@ -1,10 +1,10 @@
 <?php
 
 
-namespace AppBundle\Service\Business;
+namespace Dyosis\CRUDBundle\Service\Business;
 
-use AppBundle\Command\EntityCRUDCommand;
-use AppBundle\Service\Util\AbstractContainerAware;
+use Dyosis\CRUDBundle\Command\EntityCRUDCommand;
+use Dyosis\CRUDBundle\Service\Util\AbstractContainerAware;
 use Symfony\Component\Filesystem\Filesystem;
 
 class RoutingBusiness extends AbstractContainerAware
@@ -98,7 +98,7 @@ class RoutingBusiness extends AbstractContainerAware
 
     private function generateActionRoute($entityName, $action, $bundleName = 'AppBundle')
     {
-        return $this->container->get('twig')->render('@Page/Routing/action.html.twig', array(
+        return $this->container->get('twig')->render('@CRUD/Routing/action.html.twig', array(
             'action' => $action,
             'entity_name' => $entityName,
             'bundle_name' => $bundleName,
@@ -110,7 +110,7 @@ class RoutingBusiness extends AbstractContainerAware
 
     private function generateEntityRoute($entityName)
     {
-        return $this->container->get('twig')->render('@Page/Routing/entity.html.twig', array(
+        return $this->container->get('twig')->render('@CRUD/Routing/entity.html.twig', array(
             'entity_name' => $entityName,
             'is_admin' => $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY],
         ));
@@ -125,7 +125,7 @@ class RoutingBusiness extends AbstractContainerAware
             }
         }
 
-        return $this->container->get('twig')->render('@Page/Routing/all.html.twig', array(
+        return $this->container->get('twig')->render('@CRUD/Routing/all.html.twig', array(
             'actions' => array_keys($short_actions),
             'entity_name' => $entityName,
             'is_admin' => $this->options[EntityCRUDCommand::IS_ADMIN_OPTION_KEY],
@@ -140,7 +140,7 @@ class RoutingBusiness extends AbstractContainerAware
     private function getEntityRouteFolder($entityName, $bundleName = 'AppBundle')
     {
         $folder = $this->getRouteFolder($bundleName) . '/';
-        $entityNameSnakeCase = $this->container->get('app.util.case_manager')->snake($entityName);
+        $entityNameSnakeCase = $this->container->get('dyosis.util.case_manager')->snake($entityName);
 
         return $folder . $entityNameSnakeCase;
     }

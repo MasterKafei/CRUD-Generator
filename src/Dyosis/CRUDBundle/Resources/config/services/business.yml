@@ -1,0 +1,16 @@
+services:
+
+    dyosis.business.routing:
+        class: Dyosis\CRUDBundle\Service\Business\RoutingBusiness
+        parent: dyosis.util.abstract_container_aware
+        public: true
+
+    dyosis.business.controller:
+        class: Dyosis\CRUDBundle\Service\Business\ControllerBusiness
+        parent: dyosis.util.abstract_container_aware
+        public: true
+
+    dyosis.business.view:
+        class: Dyosis\CRUDBundle\Service\Business\ViewBusiness
+        parent: dyosis.util.abstract_container_aware
+        public: true
