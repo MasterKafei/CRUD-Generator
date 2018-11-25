@@ -1,7 +1,7 @@
 {
-    "name": "Dyosis/CRUD",
+    "name": "dyosis/crud-bundle",
     "license": "MIT",
-    "type": "library",
+    "type": "symfony-bundle",
     "description": "A simple bundle to generate CRUD",
     "keywords": ["CRUD", "generator", "symfony"],
     "authors": [
