@@ -17,9 +17,7 @@
         }
     },
     "require-dev": {
-        "symfony/twig-bundle": "~3.0"
-    },
-    "require": {
+        "symfony/twig-bundle": "~3.0",
         "symfony/console": "~3.0",
         "symfony/options-resolver": "~3.0",
         "symfony/framework-bundle": "~3.0"
